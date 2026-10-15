@@ -1,0 +1,6 @@
+/Gemfile
+/Gemfile.lock
+/favicon.ico
+_site/
+.idea/
+.DS_Store

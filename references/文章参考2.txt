@@ -1,0 +1,127 @@
+AI Full-Stack Security Platform: Web Pentest + Mobile Security + Cloud Security + Blockchain + LLM Security Assessment. 1133 API endpoints. FastAPI + AI Agent. Integrated nmap/nuclei/sqlmap real toolchain.
+
+https://github.com/1ouxilisi/ai-security-agent-platform
+https://github.com/1ouxilisi/ai-security-agent-platform/releases
+
+https://bbs.kanxue.com/thread-293107.htm
+https://bbs.kanxue.com/thread-293081.htm
+https://bbs.kanxue.com/thread-293072.htm
+
+https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
+
+https://github.com/OWASP/www-project-top-10-for-large-language-model-applications/wiki/Educational-Resources
+
+============================================================================================================
+java       skill：https://github.com/p2zhhh/java-audit-skillss
+php        skill：https://github.com/0xShe/PHP-Code-Audit-Skill
+Code Audit Skill for Claude Code：https://github.com/3stoneBrother/code-audit
+微信小程序skill：https://github.com/sssmmmwww/wxmini-security-audit
+渗透测试skill：https://github.com/uphiago/recon-skills
+安卓渗透skill：https://github.com/DragonJAR/Android-Pentesting-Skill
+JavaScript逆向skill：https://github.com/zhizhuodemao/js-reverse-mcp
+IDA逆向skill：https://github.com/miunasu/IDA-Skill
+JavaScript逆向skill：https://github.com/zhizhuodemao/js-reverse-mcp
+代码审计靶场：https://github.com/CHYbeta/Code-Audit-Challenges
+https://github.com/Tr0e/FlowDroidSkill
+https://github.com/x-glacier/kali-pentest
+https://github.com/SHAdd0WTAka/Zen-Ai-Pentest
+https://github.com/swisskyrepo/PayloadsAllTheThings
+https://github.com/rewanthtammana/Damn-Vulnerable-Bank
+============================================================================================================
+完整 frontmatter 示例（Claude Code + OpenCode 双平台兼容）
+---
+name: code-audit
+description: Code Audit Skill，污点分析 Source→Propagation→Sink 代码审计
+# OpenCode：开启TUI手动输入 /code-audit 加载本skill
+opencode/slash: true
+# OpenCode：模型是否自动尝试调用这个skill，按需true/false
+opencode/autoinvoke: false
+# Claude Code：单独指定slash名字（可选，不写默认用name）
+claude/slash: code-audit
+---
+# 下面是审计正文……
+Frontmatter 头部有强制固定规则；正文主体 Markdown 是自由发挥，但是业界有推荐的标准章节模板（不强制）
+Frontmatter（YAML 头部）硬性固定，不能乱
+必须用 `---` 包裹，必填 2 个字段：`name`、`description`**，少一个加载失败
+---
+name: code-audit
+description: 污点代码审计，执行Source→Propagation→Sink数据流漏洞分析。在用户要求代码审计、污点分析时启用。
+# 下面是可选自定义字段（平台私有，OpenCode会忽略不认识的key）
+opencode/slash: true
+opencode/autoinvoke: false
+claude/slash: code-audit
+---
+约束：
+- `name`：只能小写字母、数字、短横线 `-`，最长 64 字符，不能空格
+- `description`：最长 1024 字符，**强烈建议写清楚两件事：技能做什么 + 什么时候触发**，这是模型自动判断要不要加载 skill 的依据
+`---` 之后正文（Markdown 部分）完全自由，无强制语法
+正文没有固定关键字、没有强制章节，就是直接注入给模型的系统指令，纯 markdown 随便写：
+- 可以写一级标题、二级标题、列表、表格、代码块、规则、示例、限制、检查清单
+- 没有强制要求必须写 `## Instructions`，不写也能跑
+- 可以中文，可以英文，混合写都行
+但是为了审计 skill 可读性稳定、模型不容易跑偏，社区通用推荐模板（**推荐但非强制**）
+# 污点代码审计技能 Source→Propagation→Sink
+## 目标
+说明这个技能的任务目标，输出标准。
+## 执行流程（核心）
+1. 第一步
+2. 第二步：定位Source污点源
+3. 第三步：追踪Propagation污点传播
+4. 第四步：识别Sink汇聚点，判断漏洞
+## 检查清单
+- Source清单：用户可控输入列表
+- Propagation传播规则
+- Sink危险函数清单
+- Sanitizer净化白名单
+## 输出格式
+规定结果输出模板（非常适合代码审计，强制固定输出格式）
+## 约束与限制
+禁止行为、边界条件、不做什么
+## 示例案例
+示例代码+审计演示
+========================================================================================================================
+1、三类形态：框架、编排、Skills
+
+第一类，自主渗透框架。自己带 Agent 调度、记忆、工具链，你说目标它跑流程。代表是 PentAGI、PentestGPT、Strix、PentestAgent、CAI、ARTEX。这类最像"操作系统"，重，但完整。
+
+第二类，工具编排 / MCP 平台。不自己造 agent，而是把 nmap、nuclei、sqlmap、metasploit 这些老牌工具用 MCP 接给大模型指挥。代表是 HexStrike AI、DarkMoon、MCP Security Hub、RedTeam-Agent。这类轻，落地快，适合接进你现有的工作流。
+
+第三类，Agent Skills。不是独立软件，是一堆写给 Claude Code / Cursor 的"技能文件"，让编码助手化身渗透副驾。代表是 0xSteph/pentest-ai-agents。这类最轻，装完就能用，适合个人。还有两个 awesome 清单专门做汇总，懒得一个个翻的可以直接看清单。
+
+2、开源地址汇总（15 个）
+
+自主渗透框架
+
+https://github.com/vxcontrol/pentagi    （PentAGI）
+
+https://github.com/GreyDGL/PentestGPT    （PentestGPT）
+
+https://github.com/usestrix/strix    （Strix）
+
+https://github.com/GH05TCREW/pentestagent    （PentestAgent）
+
+https://github.com/aliasrobotics/cai    （CAI）
+
+https://github.com/Autumn-27/ARTEX    （ARTEX）
+
+https://github.com/sec-js/redamon    （RedAmon，早期）
+
+工具编排 / MCP 平台
+
+https://github.com/0x4m4/hexstrike-ai    （HexStrike AI）
+
+https://github.com/ASCIT31/Dark-Moon    （DarkMoon）
+
+https://github.com/FuzzingLabs/mcp-security-hub    （MCP Security Hub）
+
+https://github.com/ktol1/RedTeam-MCP    （RedTeam-Agent）
+
+Agent Skills 与汇总清单
+
+https://github.com/0xSteph/pentest-ai-agents    （28+ 子代理 Skills）
+
+https://github.com/insidetrust/awesome-ai-pentest    （awesome 清单）
+
+https://github.com/fdgnneig/Awesome-AI-Hacking-Agents    （64+ agent 清单）
+
+https://github.com/ipa-lab/hackingBuddyGPT    （学术极简，约 50 行起步）

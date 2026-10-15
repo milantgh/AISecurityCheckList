@@ -1,0 +1,2 @@
+CVE-2026-36929（OpenClaw RCE）
+CVE-2026-36930（OpenClaw 会话密钥泄露）

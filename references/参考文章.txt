@@ -1,0 +1,9 @@
+参考：CrowdStrike《Prompt Injection Methods》分类海报
+参考：TryHackMe《What is Prompt Injection》
+参考：《Inside the Mind of an LLM》
+参考：《What is Indirect Prompt Injection》
+参考：《Let's now take a look at some real-life examples》
+
+https://www.crowdstrike.com/explore/interactive-taxonomy/?utm_medium=org
+https://tryhackme.com/room/inputmanipulationpromptinjection
+https://www.sharonjebitok.com/prompt-injection-tryhackme

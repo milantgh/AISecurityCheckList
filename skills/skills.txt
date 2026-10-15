@@ -1,0 +1,13 @@
+https://github.com/ljagiello/ctf-skills
+https://github.com/RuoJi6/audit-skills
+https://github.com/0xShe/PHP-Code-Audit-Skill
+https://github.com/wgpsec/AboutSecurity
+https://github.com/an7ln/wmpf-mcp-bridge
+https://github.com/Autumn-27/ARTEX
+https://github.com/ok-helloworld/vibe-pentest
+https://github.com/Yean-Sec/StrikeAgent_AtkBrain-Flash
+https://github.com/notstarr/First
+https://github.com/hzhsec/AICryptoProxy
+https://github.com/kkbo8005/mitan
+https://github.com/zxcvbn001/AI-Burp-Copilot
+https://github.com/qinian11/TGSEC-Qtzuu
