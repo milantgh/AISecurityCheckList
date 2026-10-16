@@ -1,0 +1,99 @@
+﻿https://github.com/Autumn-27/ARTEX
+https://github.com/RuoJi6/ARTEX
+https://github.com/Kilnui/ARTEX
+https://github.com/trhhubsd/ARTEX
+https://github.com/Hinln/ARTEX
+https://github.com/mhtsec/ARTEX
+https://github.com/jiwoochris/artex-global
+https://github.com/SeaOf0/dsh-redteam-model
+https://github.com/vxcontrol/pentagi
+https://github.com/GreyDGL/PentestGPT
+https://github.com/GH05TCREW/pentestagent
+https://github.com/aliasrobotics/cai
+https://github.com/sec-js/redamon
+https://github.com/wanikua/danghuangshang
+https://github.com/tunsuy/agentory-node
+https://github.com/zgsfsec/Full-Chain-Sentinel-System
+https://github.com/Ernket/CodeScan-Artex
+https://github.com/AIPentest/CyberStrikeAI
+https://github.com/usestrix/strix
+https://github.com/zhaoxuya520/reverse-skill
+https://github.com/Batman0506/openclaw-sec-skills
+===================================
+Strix在AIAgent自主挖洞这件事上
+和韩国项目的Shin的思路高度重合
+甚至在某些方面走得更远！！！！
+===================================
+列表里的这些项目，都属于多Agent协作这个大类，但它们的协作方式很不一样。
+
+可以这么理解：多 Agent 是它们共同的“组织形态”，但每个项目内部的“团队文化”和“管理架构”各不相同。
+
+它们的共性：从“单兵”走向“团队作战”
+
+这些项目的核心逻辑，都是用多个 LLM Agent 来替代单一的“超级模型”，让它们分工协作，完成侦察、利用、验证等复杂任务。这样做的好处是，每个 Agent 可以专注于自己擅长的领域
+（比如代码生成、网络扫描），效率更高，也更接近真实的安全团队运作方式。
+
+核心差异：四种不同的“团队架构”
+
+虽然都叫“多 Agent”，但它们的组织方式可以归为几种不同的流派：
+
+1. 动态图 / “任务编队”模式
+
+代表项目：Strix
+
+这种模式更像是一个特种作战小队。系统里有一个“根 Agent”（队长），它不直接动手，而是负责分析和判断，根据任务需要，动态地“派”出专门负责侦察、利用、验证的子 Agent。任务完成后，这些子 Agent 就解散。它的核心在于高自由度的动态编排，Agent 之间的协作关系是临时组建的。
+
+2. 角色矩阵 / “参谋部”模式
+
+代表项目：PentAGI
+
+这更像一个结构严谨的军事参谋部。系统预先定义了研究员（做情报）、开发者（造武器/规划攻击）、执行者（动手打）等固定角色。任务来了之后，由“主 Agent”作为总协调，把这些固定角色像齿轮一样组织起来，按顺序或并行工作。它的核心在于组织化、平台化的协作与治理。
+
+3. 受约束计划 / “自动化工厂”模式
+
+代表项目：PentestGPT
+
+这种模式更像一条高度自动化的流水线。它不强调 Agent 之间复杂的“社交”和“协商”，而是把整个流程写死成“计划”。推理、生成、解析三个模块严格按照一个可校验的“任务树”（PTT）来运转。模型只是在既定框架下填充内容，自由度最低，但也最稳定、最可控。
+4. 分层协作 / “公司部门”模式
+
+代表项目：ARTEX
+
+ARTEX 的架构融合了上面的特点。它有一个planner（规划者） 负责看大局、定方向，然后把任务拆成一个个“意图”，交给大量的 worker（执行者） 去并行完成。这个 planner 有点像部门经理，worker 是执行员工，大家通过共享的“探索图”来同步信息。它还支持 worker 之间共享执行过程的“草稿”，协作粒度更细！
+=========================================================================================
+在 ARTEX 里，一个 Agent（比如 planner 或 worker）更像是一个逻辑上的角色，而不是一个固定的“会话窗口”。
+根据官方描述，planner 每次被唤醒时，都是一个全新的会话。但它通过一个共享的待办清单（todolist），把串行的攻击链“记录一次”，然后在后续的多轮全新会话里，按依赖关系逐步派发任务。
+所以，一个 Agent 角色的生命周期是由多个短暂的“会话”组成的，会话之间通过共享状态来保持连贯！
+这些 Agent 之间并不像人类那样“聊天”，它们的协作机制主要有这么几种：
+通过“双图”共享状态：这是 ARTEX 最核心的机制。它维护两张数据库表：
+资产图：记录所有发现的目标（域名、IP、服务等），是全局共享的“事实库”。
+探索图：记录一次任务的推进过程（意图、事实、漏洞），是每个任务独立的“思考链”。
+worker 执行完任务后，把结果写回这两张图；planner 读取图的状态，决定下一步派发什么任务。这就是它们最主要的“通讯”方式——通过共享数据层来异步协作。
+通过标准协议（如 MCP）调用工具：Agent 需要调用 nmap、curl 这些真实工具时，会通过 MCP（模型上下文协议） 来执行。MCP 是一个用 JSON-RPC 消息在 AI 和外部工具/数据源之间通信的标准协议。所以，Agent 与“外部世界”的通讯是通过 MCP 这类 API 协议完成的。
+通过专门的 SDK 内部调度：ARTEX 用的 norma SDK 提供了 agentcore、tool、permission、harness 等模块。这个 SDK 就像一个内部的“总线”，负责管理 Agent 的权限、工具调用和会话转录，让不同角色的 Agent 能在一个统一的框架下工作。
+简单总结一下：norma SDK 是骨架，双图（资产图/探索图）是共享内存，MCP 是对外的 API 协议。它们共同构成了一个工程化的多 Agent 协作系统，而不是靠简单的会话转发。
+Skill、Agent、MCP 的分工，如下：
+在 ARTEX 这类系统中，三者是这样的关系：
+Skill(方法论/剧本)：纯 Markdown 指令，告诉 Agent“遇到这种情况，第一步做什么、第二步做什么
+Agent（决策者/调度者）：阅读 Skill，判断当前任务该用哪个 Skill，然后决定调用哪个 Tool
+MCP/Tool（执行器）：实际执行操作（扫描端口、发送 HTTP 请求、读写文件）
+ARTEX 的核心是双图架构：
+资产图（全局共享）：记录所有发现的域名、IP、服务、端点，是跨任务的“事实库”
+探索图（每任务独立）：记录意图、事实、漏洞，用血缘链回答“哪个方向派生自哪些事实”
+两图靠锚点相连：既能从探索方向反查它打了哪些资产，也能从资产反查它被哪些意图测过
+它的引擎是事件驱动闭环：图一变就唤醒 planner，planner 派意图，worker 领意图执行并写回，写回又触发下一轮，直到目标被证明。
+=======================================================================================================
+PentAGI 则走了微服务 + 知识图谱的路线：Go 后端 + React 前端，PostgreSQL 存储，Neo4j 知识图谱追踪主机/服务/漏洞的关系，
+Langfuse 做 LLM 可观测性，Grafana 做系统监控。它的 Agent 协作通过编排层完成，每个 Agent 角色（研究员/开发者/执行者）有明确的职责边界
+从 XBOW 这样的商业平台的设计看，两条路线正在融合：
+Assessment Guidance 允许你上传 OpenAPI spec、路由文件、优先级说明，这些本质上就是结构化的 Skill
+但平台内部依然是协调器 + Agent 图 + 验证器的重型架构轻量的 Agent + Skill + MCP 负责“快速上手、单点突破”；
+重型的平台负责“规模化、可治理、可追溯”。选择取决于你要解决的问题是一次测试，还是一套持续运转的安全能力。
+========================================================================================================
+以 CyberStrikeAI 为例，它的架构很能说明问题。你可以把它想象成一个公司：
+1 个主控大脑：系统只配置 1 个 LLM 模型（比如 GPT-4o）作为核心“大脑”。
+这个大脑负责所有关键的推理和决策。
+N 个 Agent 角色：这个大脑可以“分身”成多个角色，比如“侦察兵”、“漏洞分析师”、“报告撰写员”。
+这些“分身”本质上是同一个模型在扮演不同角色，而不是多个不同的模型在投票。
+标准化的沟通协议：这些“分身”之间怎么交流？
+靠 MCP（模型上下文协议） 或 A2A（Agent 间协议） 这类“内部工作语言”。
+一个 Agent 完成侦察后，把结果按标准格式发给“大脑”或下一个 Agent，以此流转。
