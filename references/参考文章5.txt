@@ -1,0 +1,6 @@
+https://github.com/Vampsecure-Labs/vamp-llm-probe
+https://github.com/Vampsecure-Labs/vamp-penreport
+https://github.com/anmolksachan/LLMInjector
+https://github.com/1ouxilisi/ai-security-agent-platform/
+https://github.com/Yofunesec-labs/yofune-agent-security-checklist
+https://github.com/minyanyi/llm-security-checklist
